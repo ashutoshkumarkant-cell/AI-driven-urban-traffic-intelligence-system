@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300f0ff%22/></svg>" />
+    <title>AI-Driven Urban Traffic Intelligence & Proactive Congestion Management</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="A network-level, predictive, AI-powered traffic intelligence system that anticipates congestion and optimizes traffic flow holistically using spatio-temporal GNNs." />
+    <meta name="keywords" content="smart city, traffic intelligence, congestion management, GNN, reinforcement learning, digital twin" />
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- App Container -->
+    <div id="app">
+      <!-- Particle Background Canvas -->
+      <canvas id="neural-bg-canvas"></canvas>
+
+      <!-- Sticky Header -->
+      <header id="header">
+        <div class="logo-container">
+          <div class="logo-dot"></div>
+          <div class="logo-text">Flow<span>AI</span></div>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#solution">Solution</a></li>
+            <li><a href="#sandbox">Digital Twin</a></li>
+            <li><a href="#dashboard">Control Room</a></li>
+            <li><a href="#usecases">Use Cases</a></li>
+          </ul>
+        </nav>
+        <div class="system-status">
+          <div class="status-indicator"></div>
+          <span>Engine: Active</span>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="section-tag">Next-Gen Mobility</span>
+            <h1>Predict Traffic Before It Happens</h1>
+            <p>AI-powered, network-level traffic intelligence that anticipates bottlenecks, synchronizes traffic grids, and guarantees greener, friction-free city flows.</p>
+            <div class="hero-actions">
+              <a href="#sandbox" class="btn btn-primary">Launch Sandbox <i class="fa-solid fa-play"></i></a>
+              <a href="#dashboard" class="btn btn-secondary">Explore Control Room</a>
+            </div>
+            
+            <!-- Live Ticker Ribbon -->
+            <div class="metrics-grid">
+              <div class="metric-card glass">
+                <div class="metric-num cyan" id="stat-congestion">-34%</div>
+                <div class="metric-label">Congestion</div>
+              </div>
+              <div class="metric-card glass">
+                <div class="metric-num purple" id="stat-delay">-18m</div>
+                <div class="metric-label">Daily Delay</div>
+              </div>
+              <div class="metric-card glass">
+                <div class="metric-num green" id="stat-co2">-26%</div>
+                <div class="metric-label">CO₂ Output</div>
+              </div>
+              <div class="metric-card glass">
+                <div class="metric-num coral" id="stat-ems">+42%</div>
+                <div class="metric-label">EMS Response</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-visualization">
+            <div class="hero-canvas-container">
+              <canvas id="hero-canvas"></canvas>
+              <div class="canvas-overlay-text">
+                <i class="fa-solid fa-circle-nodes"></i> Active Graph: <span>1,240 nodes / s</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Problem Section -->
+      <section id="problem" class="reveal">
+        <div class="problem-grid">
+          <div>
+            <span class="section-tag">The Gridlock Crisis</span>
+            <h2 class="section-title">Urban Congestion is a System Failure</h2>
+            <p class="section-desc">Traditional navigation apps are reactive. They route individual cars onto the exact same bypasses, shifting traffic from one gridlock to another. The result? A cascade of compounding delays.</p>
+            <a href="#solution" class="btn btn-secondary">How We Solve It <i class="fa-solid fa-arrow-down"></i></a>
+          </div>
+          <div class="problem-cards">
+            <div class="problem-card glass problem-highlight">
+              <div class="objective-icon coral"><i class="fa-solid fa-hourglass-half"></i></div>
+              <h3>Wasted Travel Time</h3>
+              <p>Commuters waste an average of 54 hours per year stuck in gridlocks, causing massive productivity losses.</p>
+            </div>
+            <div class="problem-card glass">
+              <div class="objective-icon coral"><i class="fa-solid fa-gas-pump"></i></div>
+              <h3>Excess Fuel Burn</h3>
+              <p>Stop-and-go driving burns millions of gallons of excess fuel, costing vehicle owners billions annually.</p>
+            </div>
+            <div class="problem-card glass">
+              <div class="objective-icon coral"><i class="fa-solid fa-cloud-sun"></i></div>
+              <h3>Soot & Pollution</h3>
+              <p>Idling vehicles generate excessive localized emissions, deteriorating air quality in residential corridors.</p>
+            </div>
+            <div class="problem-card glass">
+              <div class="objective-icon coral"><i class="fa-solid fa-truck-medical"></i></div>
+              <h3>Delayed Responders</h3>
+              <p>Congested intersections block emergency vehicles, directly impacting critical patient response times.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Solution Section -->
+      <section id="solution" class="reveal">
+        <span class="section-tag">A Paradigm Shift</span>
+        <h2 class="section-title">Proactive, Network-Wide Optimization</h2>
+        <p class="section-desc">FlowAI transforms traffic management by moving from reactive routing to proactive traffic balancing. Our system predicts city-scale grid congestion 30 minutes in advance and balances flows globally.</p>
+        
+        <div class="solution-highlights">
+          <div class="solution-card glass">
+            <div class="solution-icon"><i class="fa-solid fa-brain"></i></div>
+            <h3>Predictive Neural Nets</h3>
+            <p>Anticipates jams before they solidify, using deep spatial temporal neural network forecasting trained on city grids.</p>
+          </div>
+          <div class="solution-card glass">
+            <div class="solution-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h3>Global Flow Balancing</h3>
+            <p>Coordinates signal grids and suggestions globally, avoiding the reactive "congestion shifting" of modern GPS apps.</p>
+          </div>
+          <div class="solution-card glass">
+            <div class="solution-icon"><i class="fa-solid fa-server"></i></div>
+            <h3>Hardware Free Integration</h3>
+            <p>Leverages existing cellular, transit, and GPS probe feeds. No heavy reliance on expensive IoT road sensors or CCTV infrastructure.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Features Section -->
+      <section id="features" class="reveal">
+        <span class="section-tag">Platform Mechanics</span>
+        <h2 class="section-title">Engineered for Urban Complexity</h2>
+        <p class="section-desc">Our platform merges three cutting-edge fields in computer science to conquer city traffic dynamics.</p>
+        
+        <div class="features-container">
+          <!-- Feature 1: Spatio-Temporal GNN -->
+          <div class="feature-block">
+            <div class="feature-visual">
+              <canvas id="gnn-canvas"></canvas>
+            </div>
+            <div>
+              <span class="section-tag">AI Architecture</span>
+              <h3>Spatio-Temporal Graph Neural Networks</h3>
+              <p style="margin: 1rem 0;">Cities are graphs. Intersections are nodes; roads are edges. Our custom GNN models understand the flow of traffic not just as local street blocks, but as highly interconnected spatial systems propagating congestion through time.</p>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+                <li><i class="fa-solid fa-check text-cyan" style="color: var(--neon-cyan); margin-right: 0.5rem;"></i> Models spatial propagation (how jams spread)</li>
+                <li><i class="fa-solid fa-check text-cyan" style="color: var(--neon-cyan); margin-right: 0.5rem;"></i> Forecasts future states up to 45 minutes ahead</li>
+                <li><i class="fa-solid fa-check text-cyan" style="color: var(--neon-cyan); margin-right: 0.5rem;"></i> Fuses spatial layout with temporal cyclical patterns</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Feature 2: Reinforcement Learning Signal Control -->
+          <div class="feature-block reverse">
+            <div>
+              <span class="section-tag">Adaptive Optimization</span>
+              <h3>Reinforcement Learning Signal Control</h3>
+              <p style="margin: 1rem 0;">Static timers fail under pressure. FlowAI deploys cooperative, multi-agent reinforcement learning at every intersection. Signal controllers communicate with neighbors, dynamically adapting green times to keep traffic moving smoothly.</p>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+                <li><i class="fa-solid fa-check text-purple" style="color: var(--neon-purple); margin-right: 0.5rem;"></i> Self-learning agents adapt to changing demand profiles</li>
+                <li><i class="fa-solid fa-check text-purple" style="color: var(--neon-purple); margin-right: 0.5rem;"></i> Neighbor-to-neighbor cooperative corridor syncing</li>
+                <li><i class="fa-solid fa-check text-purple" style="color: var(--neon-purple); margin-right: 0.5rem;"></i> Priority corridors for transit and emergency vehicles</li>
+              </ul>
+            </div>
+            <div class="feature-visual">
+              <!-- Animated signal control placeholder / canvas visual -->
+              <canvas id="rl-signals-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Digital Twin Sandbox -->
+      <section id="sandbox" class="reveal">
+        <span class="section-tag">Live Sandbox Simulator</span>
+        <h2 class="section-title">Traffic Digital Twin Engine</h2>
+        <p class="section-desc">Interact with a mock-up of our city-scale Digital Twin simulation. Adjust grid metrics, inject accidents or storms, and enable Proactive Optimization to see how the system resolves gridlock in real time.</p>
+        
+        <div class="sandbox-panel glass">
+          <div class="sandbox-header">
+            <div class="sandbox-title">
+              <div class="logo-dot"></div>
+              <h3>Twin Sandbox Environment - Zone 4 Corridor</h3>
+            </div>
+            <span class="sandbox-badge">Real-Time Canvas Simulation</span>
+          </div>
+          <div class="sandbox-body">
+            <!-- Viewport -->
+            <div class="sandbox-viewport">
+              <canvas id="twin-sandbox-canvas"></canvas>
+              
+              <!-- Smart Junction Explorer Overlay -->
+              <div id="junction-explorer" class="explorer-overlay glass">
+                <button id="close-explorer-btn" class="close-btn">&times;</button>
+                <h4><i class="fa-solid fa-circle-nodes"></i> Smart Junction Explorer</h4>
+                <div class="explorer-body">
+                  <h5 id="explorer-junction-name">Junction A</h5>
+                  <div class="explorer-grid">
+                    <div class="explorer-col">
+                      <div class="explorer-label">Queue Length</div>
+                      <div class="explorer-val" id="exp-queue">12 cars</div>
+                    </div>
+                    <div class="explorer-col">
+                      <div class="explorer-label">Wait Time</div>
+                      <div class="explorer-val" id="exp-wait">45s</div>
+                    </div>
+                    <div class="explorer-col">
+                      <div class="explorer-label">Signal Timing</div>
+                      <div class="explorer-val" id="exp-signals">30s G / 30s R</div>
+                    </div>
+                    <div class="explorer-col">
+                      <div class="explorer-label">Congestion Risk</div>
+                      <div class="explorer-val text-red" id="exp-risk">HIGH (82%)</div>
+                    </div>
+                  </div>
+                  <div class="explorer-extra">
+                    <span>Expected Delay: <strong id="exp-delay">+14s</strong> in 10m</span>
+                  </div>
+                  <button id="override-signal-btn" class="btn btn-secondary btn-sm" style="margin-top: 0.75rem; width: 100%; font-size: 0.8rem; padding: 0.4rem;"><i class="fa-solid fa-traffic-light"></i> Force Green Signal</button>
+                </div>
+              </div>
+
+              <!-- Citizen Pin Indicator Mode Display -->
+              <div id="reporting-active-indicator" class="reporting-status-overlay">
+                <span class="pulse-dot-red"></span> Click on map to place reported <span id="reporting-type-label">issue</span>
+              </div>
+
+              <!-- Rush Hour Timeline Overlay -->
+              <div class="timeline-overlay glass">
+                <div class="timeline-title">Rush Hour Forecast Timeline</div>
+                <div class="timeline-steps">
+                  <button class="timeline-step-btn active" data-hour="6"><span class="dot green"></span> 6 AM</button>
+                  <button class="timeline-step-btn" data-hour="8"><span class="dot yellow"></span> 8 AM</button>
+                  <button class="timeline-step-btn" data-hour="9"><span class="dot red"></span> 9 AM</button>
+                  <button class="timeline-step-btn" data-hour="11"><span class="dot green"></span> 11 AM</button>
+                  <button class="timeline-step-btn" data-hour="17"><span class="dot red"></span> 5 PM</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Controls Sidebar -->
+            <div class="sandbox-controls">
+              <!-- Slider for grid demand -->
+              <div class="control-group">
+                <label for="demand-slider">Traffic Demand: <span id="demand-val">Moderate</span></label>
+                <input type="range" id="demand-slider" class="slider-input" min="1" max="3" value="2" />
+              </div>
+              
+              <!-- Weather selector -->
+              <div class="control-group">
+                <label>Weather Profile</label>
+                <div class="toggle-grid">
+                  <button class="toggle-btn weather-btn active" data-weather="clear"><i class="fa-solid fa-sun"></i> Clear</button>
+                  <button class="toggle-btn weather-btn" data-weather="rain"><i class="fa-solid fa-cloud-showers-heavy"></i> Rain</button>
+                  <button class="toggle-btn weather-btn" data-weather="fog"><i class="fa-solid fa-smog"></i> Fog</button>
+                  <button class="toggle-btn weather-btn" data-weather="heatwave"><i class="fa-solid fa-temperature-high"></i> Heatwave</button>
+                </div>
+                <!-- Weather Impact Intelligence Panel -->
+                <div class="impact-intelligence glass-mini">
+                  <div class="impact-title"><i class="fa-solid fa-microchip"></i> AI Weather Impact Prediction</div>
+                  <div class="impact-metrics-row">
+                    <div class="impact-item">
+                      <span class="label">Congestion</span>
+                      <span class="value cyan" id="weather-impact-congestion">+0%</span>
+                    </div>
+                    <div class="impact-item">
+                      <span class="label">Accident Risk</span>
+                      <span class="value coral" id="weather-impact-accident">12%</span>
+                    </div>
+                    <div class="impact-item">
+                      <span class="label">Avg Speed</span>
+                      <span class="value green" id="weather-impact-speed">-0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Event selector -->
+              <div class="control-group">
+                <label>Event Impact Simulator</label>
+                <select id="event-selector" class="select-input">
+                  <option value="none">No Active Event</option>
+                  <option value="ipl">IPL Match (Stadium)</option>
+                  <option value="concert">Live Music Concert</option>
+                  <option value="rally">Political Rally</option>
+                  <option value="fest">College Fest</option>
+                </select>
+                <!-- Event Impact Stats -->
+                <div id="event-impact-panel" class="impact-intelligence glass-mini" style="display: none;">
+                  <div class="impact-title"><i class="fa-solid fa-chart-pie"></i> AI Event Congestion Estimate</div>
+                  <div class="event-stats-list">
+                    <div><span>Extra Vehicles:</span> <strong id="event-stat-vehicles" class="purple">+0</strong></div>
+                    <div><span>Congestion Zones:</span> <strong id="event-stat-zones" class="cyan">None</strong></div>
+                    <div><span>Parking Demand:</span> <strong id="event-stat-parking" class="amber">Moderate</strong></div>
+                    <div><span>Suggested Diversion:</span> <strong id="event-stat-diversion" class="green">None</strong></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Emergency Corridor -->
+              <div class="control-group">
+                <label>Emergency Vehicle Corridor</label>
+                <div class="select-row">
+                  <select id="ems-vehicle-selector" class="select-input select-half">
+                    <option value="ambulance-1">Ambulance A</option>
+                    <option value="ambulance-2">Ambulance B</option>
+                  </select>
+                  <select id="ems-hospital-selector" class="select-input select-half">
+                    <option value="hospital-central">Central Hospital</option>
+                    <option value="hospital-general">General Hospital</option>
+                  </select>
+                </div>
+                <button id="ems-corridor-btn" class="btn-trigger ems-btn"><i class="fa-solid fa-truck-medical"></i> Activate Green Corridor</button>
+                <div id="ems-stats-panel" class="impact-intelligence glass-mini" style="display: none;">
+                  <div class="impact-title"><i class="fa-solid fa-wave-square"></i> Real-Time Corridor Tracking</div>
+                  <div class="ems-stats-grid">
+                    <div><span class="label">Normal ETA:</span> <strong id="ems-normal-eta">18 min</strong></div>
+                    <div><span class="label">Optimized ETA:</span> <strong id="ems-optimized-eta">11 min</strong></div>
+                    <div><span class="label">Time Saved:</span> <strong id="ems-time-saved" class="green">7 min</strong></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Citizen Reporting -->
+              <div class="control-group">
+                <label>Citizen Traffic Reporting</label>
+                <div class="report-buttons-grid">
+                  <button class="report-btn" data-report="accident"><i class="fa-solid fa-car-burst"></i> Accident</button>
+                  <button class="report-btn" data-report="pothole"><i class="fa-solid fa-circle-dot"></i> Pothole</button>
+                  <button class="report-btn" data-report="closure"><i class="fa-solid fa-road-barrier"></i> Closure</button>
+                  <button class="report-btn" data-report="waterlogging"><i class="fa-solid fa-cloud-showers-water"></i> Flood</button>
+                </div>
+              </div>
+              
+              <!-- Incident trigger button -->
+              <div class="control-group">
+                <label>Grid Interventions</label>
+                <button id="incident-btn" class="btn-trigger"><i class="fa-solid fa-triangle-exclamation"></i> Trigger Crash / Roadblock</button>
+              </div>
+              
+              <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 0.5rem;">
+                <div class="control-group">
+                  <label style="color: var(--neon-cyan); font-weight: 700;">PROACTIVE OPTIMIZATION</label>
+                  <button id="opt-toggle-btn" class="btn-trigger" style="background: rgba(0, 240, 255, 0.1); border-color: var(--neon-cyan); color: var(--neon-cyan);">
+                    <i class="fa-solid fa-toggle-off"></i> AI Optimization: OFF
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Objectives & Impact Section -->
+      <section id="objectives" class="reveal">
+        <span class="section-tag">Urban Impact</span>
+        <h2 class="section-title">Measurable System Objectives</h2>
+        <p class="section-desc">We target network-wide improvements across critical urban performance indicators, directly translating mathematical optimizations into quality-of-life wins.</p>
+        
+        <div class="objectives-grid">
+          <div class="objective-card glass glow-cyan">
+            <div class="objective-icon cyan"><i class="fa-solid fa-arrow-trend-down"></i></div>
+            <h3>-30% Congestion</h3>
+            <p>Significant reduction in spatial hotspots and peak gridlocks.</p>
+          </div>
+          <div class="objective-card glass glow-purple">
+            <div class="objective-icon purple"><i class="fa-solid fa-bolt"></i></div>
+            <h3>-25% Trip Delay</h3>
+            <p>Smoother daily commutes and optimized transit flows.</p>
+          </div>
+          <div class="objective-card glass glow-cyan">
+            <div class="objective-icon green"><i class="fa-solid fa-leaf"></i></div>
+            <h3>-15% Emissions</h3>
+            <p>Fewer idling engines reduce urban greenhouse gas concentrations.</p>
+          </div>
+          <div class="objective-card glass glow-purple">
+            <div class="objective-icon coral"><i class="fa-solid fa-truck-medical"></i></div>
+            <h3>-40% EMS Delay</h3>
+            <p>Immediate green corridors for ambulances and emergency response.</p>
+          </div>
+          <div class="objective-card glass glow-cyan">
+            <div class="objective-icon amber"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>+20% Safety</h3>
+            <p>Fewer stop-and-go spikes reduces bumper-to-bumper collisions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Flow -->
+      <section id="flow" class="reveal">
+        <span class="section-tag">Operational Flow</span>
+        <h2 class="section-title">How the FlowAI Engine Operates</h2>
+        <p class="section-desc">Our closed-loop feedback system continuous monitors, forecasts, tests, and adjusts traffic flow parameters globally.</p>
+        
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="flow-number">01</div>
+            <h3>Data Ingestion</h3>
+            <p>Anonymized GPS paths, transit patterns, and weather datasets flow into our real-time streaming pipeline.</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">02</div>
+            <h3>Spatial Prediction</h3>
+            <p>GNNs analyze relationships between roads, forecasting traffic bottlenecks 30-45 minutes in advance.</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">03</div>
+            <h3>Twin Simulation</h3>
+            <p>The Digital Twin runs high-speed parallel simulations of candidate mitigation routing and signal patterns.</p>
+          </div>
+          <div class="flow-step">
+            <div class="flow-number">04</div>
+            <h3>Live Optimization</h3>
+            <p>Reinforcement Learning controllers apply optimized signal phases and route guidance suggestions globally.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Preview Section -->
+      <section id="dashboard" class="reveal">
+        <span class="section-tag">Control Room Console</span>
+        <h2 class="section-title">Grid Operations Dashboard</h2>
+        <p class="section-desc">Urban mobility managers access a high-fidelity control panel showing traffic velocities, alert matrices, and real-time AI signal interventions.</p>
+        
+        <div class="dashboard-preview glass">
+          <!-- Main Section -->
+          <div class="dashboard-main">
+            <div class="dashboard-top">
+              <div class="dashboard-title-area">
+                <h3><i class="fa-solid fa-sliders"></i> METROPOLIS CONTROL OVERVIEW</h3>
+                <p>Grid Zone 1-4 Operations Core • Refresh Rate: 500ms</p>
+              </div>
+              <div class="dashboard-tabs">
+                <button class="dash-tab-btn active" data-grid="speed">Grid Speed</button>
+                <button class="dash-tab-btn" data-grid="co2">Carbon Offset</button>
+                <button class="dash-tab-btn" data-grid="signal">Signal Efficiency</button>
+                <button class="dash-tab-btn" data-grid="executive"><i class="fa-solid fa-user-shield"></i> Executive View</button>
+              </div>
+            </div>
+            
+            <!-- City Health Score Card -->
+            <div class="city-health-card glass glow-purple">
+              <div class="city-health-main">
+                <div class="score-circle-container">
+                  <svg class="score-ring" width="80" height="80">
+                    <circle class="score-ring-bg" cx="40" cy="40" r="34"></circle>
+                    <circle class="score-ring-progress" id="health-score-ring" cx="40" cy="40" r="34" stroke-dasharray="213.6" stroke-dashoffset="27.8"></circle>
+                  </svg>
+                  <div class="score-number-overlay" id="health-score-num">87</div>
+                </div>
+                <div class="score-info">
+                  <h4>City Mobility Health Score</h4>
+                  <p>Real-time aggregated health index measuring spatial grid congestion, transit delay deviations, air quality index, and incident response efficiency.</p>
+                </div>
+              </div>
+              <div class="health-breakdown">
+                <div class="health-metric">
+                  <span class="label">Congestion</span>
+                  <div class="progress-bar-small"><div class="fill green" id="health-bar-congestion" style="width: 92%;"></div></div>
+                  <span class="val" id="health-val-congestion">92/100</span>
+                </div>
+                <div class="health-metric">
+                  <span class="label">Travel Time</span>
+                  <div class="progress-bar-small"><div class="fill purple" id="health-bar-travel" style="width: 85%;"></div></div>
+                  <span class="val" id="health-val-travel">85/100</span>
+                </div>
+                <div class="health-metric">
+                  <span class="label">Air Quality</span>
+                  <div class="progress-bar-small"><div class="fill green" id="health-bar-air" style="style: 81%; width: 81%;"></div></div>
+                  <span class="val" id="health-val-air">81/100</span>
+                </div>
+                <div class="health-metric">
+                  <span class="label">Incident Response</span>
+                  <div class="progress-bar-small"><div class="fill cyan" id="health-bar-incident" style="width: 90%;"></div></div>
+                  <span class="val" id="health-val-incident">90/100</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grid Indicators -->
+            <div class="dash-grid">
+              <div class="dash-mini-card">
+                <div class="dash-mini-header">Avg Grid Velocity <span>Nodes (1k+)</span></div>
+                <div class="dash-mini-val" id="dash-val-speed">38.4<span>km/h</span></div>
+                <div class="dash-trend up" id="dash-trend-speed"><i class="fa-solid fa-circle-up"></i> +12% vs yesterday</div>
+              </div>
+              <div class="dash-mini-card">
+                <div class="dash-mini-header">Total CO₂ Mitigated <span>Cumulative</span></div>
+                <div class="dash-mini-val" id="dash-val-carbon">1,482<span>kg</span></div>
+                <div class="dash-trend up"><i class="fa-solid fa-circle-up"></i> -15% Idle Time</div>
+              </div>
+              <div class="dash-mini-card">
+                <div class="dash-mini-header">Signal Sync Rate <span>Adaptive Mode</span></div>
+                <div class="dash-mini-val" id="dash-val-sync">94.2<span>%</span></div>
+                <div class="dash-trend up"><i class="fa-solid fa-circle-up"></i> Optimal Green Wave</div>
+              </div>
+            </div>
+
+            <!-- Traffic Prediction Accuracy Panel -->
+            <div class="prediction-accuracy-row">
+              <div class="accuracy-card glass-mini">
+                <div class="acc-title">Forecast Accuracy</div>
+                <div class="acc-body">
+                  <div class="acc-val">94.2%</div>
+                  <div class="acc-sparkline">
+                    <i class="fa-solid fa-chart-line text-cyan"></i> Real-time GNN validation
+                  </div>
+                </div>
+              </div>
+              <div class="accuracy-card glass-mini">
+                <div class="acc-title">Predictions Generated</div>
+                <div class="acc-body">
+                  <div class="acc-val" id="predictions-generated-count">12,846</div>
+                  <span class="subtext">Across 24 grid segments</span>
+                </div>
+              </div>
+              <div class="accuracy-card glass-mini">
+                <div class="acc-title">Hotspots Detected</div>
+                <div class="acc-body">
+                  <div class="acc-val" id="hotspots-detected-count">41</div>
+                  <span class="subtext text-orange">Grid constraints identified</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Canvas Chart / Tab Panels -->
+            <div class="chart-viewport">
+              <div id="chart-canvas-container" class="tab-panel-content active">
+                <canvas id="dashboard-chart-canvas"></canvas>
+              </div>
+
+              <!-- Sustainability Dashboard Sub-panel -->
+              <div id="sustainability-panel" class="tab-panel-content sustainability-subpanel" style="display: none;">
+                <h4>🌱 Sustainability Impact Analytics</h4>
+                <div class="sustainability-grid">
+                  <div class="co2-card glass-mini border-glow">
+                    <div class="co2-title">Without AI Optimization</div>
+                    <div class="co2-val text-red">18.2 <span class="unit">tons/day</span></div>
+                    <div class="co2-desc">Standard fixed signal timings</div>
+                  </div>
+                  <div class="co2-card glass-mini border-glow glow-green">
+                    <div class="co2-title">With FlowAI Optimization</div>
+                    <div class="co2-val text-green">12.4 <span class="unit">tons/day</span></div>
+                    <div class="co2-desc">Dynamic green wave sync</div>
+                  </div>
+                  <div class="impact-metrics-list">
+                    <div class="impact-metric-item">
+                      <div class="imi-icon text-orange"><i class="fa-solid fa-gas-pump"></i></div>
+                      <div class="imi-details">
+                        <div class="val" id="fuel-saved-val">1,450 gal/day</div>
+                        <div class="lbl">Total Fuel Saved</div>
+                      </div>
+                    </div>
+                    <div class="impact-metric-item">
+                      <div class="imi-icon text-cyan"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                      <div class="imi-details">
+                        <div class="val" id="carbon-reduced-val">5.8 tons/day</div>
+                        <div class="lbl">Carbon Emitted Reduced (31.8%)</div>
+                      </div>
+                    </div>
+                    <div class="impact-metric-item">
+                      <div class="imi-icon text-green"><i class="fa-solid fa-tree"></i></div>
+                      <div class="imi-details">
+                        <div class="val" id="trees-eq-val">290 trees</div>
+                        <div class="lbl">Daily Trees Equivalent Offset</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Executive Decision Dashboard -->
+              <div id="executive-panel" class="tab-panel-content executive-subpanel" style="display: none;">
+                <h4><i class="fa-solid fa-user-shield text-purple"></i> City Authority Executive Recommendations</h4>
+                <p class="panel-desc-small">Policy interventions formulated from real-time network bottlenecks and predictive accident indices.</p>
+                <div class="rec-list">
+                  <div class="rec-item glass-mini border-glow">
+                    <div class="rec-icon text-cyan"><i class="fa-solid fa-traffic-light"></i></div>
+                    <div class="rec-content">
+                      <div class="rec-title">Optimize Signal Phase - Junction 12</div>
+                      <div class="rec-desc">Increase North-South green duration by 8 seconds to discharge Broadway queue.</div>
+                    </div>
+                    <button class="btn btn-primary btn-sm rec-action-btn" data-action="signal-12" id="btn-rec-signal">Apply Adjustment</button>
+                  </div>
+                  <div class="rec-item glass-mini border-glow">
+                    <div class="rec-icon text-orange"><i class="fa-solid fa-diamond-turn-right"></i></div>
+                    <div class="rec-content">
+                      <div class="rec-title">Open Corridor 4 Diversion</div>
+                      <div class="rec-desc">Enable dynamic detour on Broadway Link Lane 3 to release crash backups.</div>
+                    </div>
+                    <button class="btn btn-primary btn-sm rec-action-btn" data-action="diversion-4" id="btn-rec-diversion">Open Diversion</button>
+                  </div>
+                  <div class="rec-item glass-mini border-glow">
+                    <div class="rec-icon text-purple"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="rec-content">
+                      <div class="rec-title">Deploy Traffic Warden</div>
+                      <div class="rec-desc">Dispatch rapid-response traffic enforcement unit to coordinate Sector 4 bottlenecks.</div>
+                    </div>
+                    <button class="btn btn-primary btn-sm rec-action-btn" data-action="deploy-officer" id="btn-rec-warden">Deploy Officer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Sidebar -->
+          <div class="dashboard-sidebar">
+            <!-- Simulated Logs -->
+            <div class="log-panel glass">
+              <h4>System Analytics Stream</h4>
+              <div class="log-stream" id="log-stream">
+                <div class="log-line"><span>[14:58:30]</span> <span class="system">SYSTEM</span> GNN forecast model loaded.</div>
+                <div class="log-line"><span>[14:58:31]</span> <span class="system">SYSTEM</span> Fusing GPS trace data.</div>
+                <div class="log-line"><span>[14:58:32]</span> Ingestion rate: 4,281 coordinate tuples/sec.</div>
+              </div>
+            </div>
+
+            <!-- AI Traffic Incident Detection Center -->
+            <div class="incident-detection-panel glass">
+              <h4><i class="fa-solid fa-tower-broadcast text-red"></i> Incident Detection Center</h4>
+              <div class="incident-alert-list">
+                <div class="incident-alert-card flashing-alert-red" id="alert-accident">
+                  <div class="alert-header">
+                    <span class="badge badge-red">🚨 Accident</span>
+                    <span class="alert-time">Live</span>
+                  </div>
+                  <div class="alert-body">
+                    <h5>Multi-vehicle crash on Broadway</h5>
+                    <p>Corridor 4 Lane 2 fully blocked. Spreading delays.</p>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn-alert-action" id="locate-accident-btn"><i class="fa-solid fa-map-pin"></i> Locate on Twin</button>
+                  </div>
+                </div>
+                
+                <div class="incident-alert-card flashing-alert-orange" id="alert-breakdown">
+                  <div class="alert-header">
+                    <span class="badge badge-orange">⚠️ Breakdown</span>
+                    <span class="alert-time">2m ago</span>
+                  </div>
+                  <div class="alert-body">
+                    <h5>Stalled Truck on Junction 7</h5>
+                    <p>Right lane blocked. Towing vehicle dispatched.</p>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn-alert-action" id="locate-breakdown-btn"><i class="fa-solid fa-map-pin"></i> Locate on Twin</button>
+                  </div>
+                </div>
+
+                <div class="incident-alert-card flashing-alert-purple" id="alert-blockage">
+                  <div class="alert-header">
+                    <span class="badge badge-purple">🛑 Road Blockage</span>
+                    <span class="alert-time">5m ago</span>
+                  </div>
+                  <div class="alert-body">
+                    <h5>MG Road Lane Closure</h5>
+                    <p>Construction backlog. Flow speed reduced by 50%.</p>
+                  </div>
+                  <div class="alert-actions">
+                    <button class="btn-alert-action" id="locate-blockage-btn"><i class="fa-solid fa-map-pin"></i> Locate on Twin</button>
+                  </div>
+                </div>
+
+                <div class="incident-alert-card" id="alert-signal">
+                  <div class="alert-header">
+                    <span class="badge badge-grey">⚡ Signal Failure</span>
+                    <span class="alert-time">Resolved</span>
+                  </div>
+                  <div class="alert-body">
+                    <h5>Junction 12 Controller Error</h5>
+                    <p>AI backup agent activated. Adaptive timing restored.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Intervention Alerts -->
+            <div class="optimizations-panel glass">
+              <h4>Active Adaptations</h4>
+              <div class="opt-list">
+                <div class="opt-item">
+                  <div class="opt-info">
+                    <div class="opt-title">Broadway Corridor</div>
+                    <div class="opt-desc">Extended green phase sync</div>
+                  </div>
+                  <span class="opt-status active">ACTIVE</span>
+                </div>
+                <div class="opt-item">
+                  <div class="opt-info">
+                    <div class="opt-title">Madison Ave Bottleneck</div>
+                    <div class="opt-desc">Flow rerouting suggestions</div>
+                  </div>
+                  <span class="opt-status active">ACTIVE</span>
+                </div>
+                <div class="opt-item">
+                  <div class="opt-info">
+                    <div class="opt-title">Zone 4 (Accident Area)</div>
+                    <div class="opt-desc">Resolving lane blockage delays</div>
+                  </div>
+                  <span class="opt-status executing" id="acc-status-badge">STANDBY</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use Cases Tabs -->
+      <section id="usecases" class="reveal">
+        <span class="section-tag">Deployment Verticals</span>
+        <h2 class="section-title">Who FlowAI Empowers</h2>
+        <p class="section-desc">Our intelligent platform adapts to the unique operational goals of municipal stakeholders, fleet controllers, and planning departments.</p>
+        
+        <div class="usecase-layout">
+          <!-- Selection buttons -->
+          <div class="usecase-selectors">
+            <button class="usecase-btn active" data-usecase="smartcities">
+              <span>Vertical 01</span>
+              Smart City Ecosystems
+            </button>
+            <button class="usecase-btn" data-usecase="gov">
+              <span>Vertical 02</span>
+              Transit Departments
+            </button>
+            <button class="usecase-btn" data-usecase="planners">
+              <span>Vertical 03</span>
+              Urban & Infrastructure Planners
+            </button>
+            <button class="usecase-btn" data-usecase="emergency">
+              <span>Vertical 04</span>
+              Emergency Services
+            </button>
+          </div>
+          
+          <!-- Content Panels -->
+          <div class="usecase-content-panel glass">
+            <!-- Panel 1 -->
+            <div class="usecase-panel active" id="uc-smartcities">
+              <h3>Smart Cities</h3>
+              <p>Integrate traffic management directly into your broader municipal operating system. FlowAI communicates natively with smart meters, street lighting, and citizen alerts to support unified urban automation.</p>
+              <div class="usecase-features">
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-microchip"></i></span>
+                  <div>
+                    <div class="uf-title">Unified IoT Bridges</div>
+                    <div class="uf-desc">Expose secure APIs to synchronize smart street furniture.</div>
+                  </div>
+                </div>
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-leaf"></i></span>
+                  <div>
+                    <div class="uf-title">Eco-Centric Controls</div>
+                    <div class="uf-desc">Prioritize micro-mobility lanes and optimize low-emission zones.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Panel 2 -->
+            <div class="usecase-panel" id="uc-gov">
+              <h3>Government Traffic Departments</h3>
+              <p>Fulfill public mandates for reduction in commute times without requiring multi-billion-dollar road expansions. Enhance existing signal controllers with our predictive AI layer to maximize throughput.</p>
+              <div class="usecase-features">
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-traffic-light"></i></span>
+                  <div>
+                    <div class="uf-title">ATC Upgrades</div>
+                    <div class="uf-desc">Inject AI signal instructions into legacy NEMA / ATC networks.</div>
+                  </div>
+                </div>
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-chart-line"></i></span>
+                  <div>
+                    <div class="uf-title">Audit Trails</div>
+                    <div class="uf-desc">Validate grid-wide improvement metrics for municipal reports.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Panel 3 -->
+            <div class="usecase-panel" id="uc-planners">
+              <h3>Urban Planners</h3>
+              <p>Stop guessing the impact of road adjustments. Use the Traffic Digital Twin to stress-test zoning, new developments, or major highway reconstruction before laying down asphalt.</p>
+              <div class="usecase-features">
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-map-location-dot"></i></span>
+                  <div>
+                    <div class="uf-title">What-If Playgrounds</div>
+                    <div class="uf-desc">Simulate road construction blocks and assess backup propagation.</div>
+                  </div>
+                </div>
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-bus"></i></span>
+                  <div>
+                    <div class="uf-title">Transit Corridor Design</div>
+                    <div class="uf-desc">Test transit-only lane additions and evaluate flow impact.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Panel 4 -->
+            <div class="usecase-panel" id="uc-emergency">
+              <h3>Emergency Medical & Safety Services</h3>
+              <p>When seconds mean lives, FlowAI clears the way. The system identifies active EMS routes and coordinates adaptive green light waves, pushing civilian traffic out of intersection boxes dynamically.</p>
+              <div class="usecase-features">
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-kit-medical"></i></span>
+                  <div>
+                    <div class="uf-title">Green Wave Interventions</div>
+                    <div class="uf-desc">Deploy preemptive corridors automatically ahead of emergency runs.</div>
+                  </div>
+                </div>
+                <div class="usecase-feature">
+                  <span class="uf-bullet"><i class="fa-solid fa-circle-exclamation"></i></span>
+                  <div>
+                    <div class="uf-title">Grid clearing</div>
+                    <div class="uf-desc">Safely adjust signals to release backups blocking responder lanes.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech Stack Section -->
+      <section id="tech" class="reveal">
+        <span class="section-tag">Technology Blueprint</span>
+        <h2 class="section-title">High-Scale AI Engine Architecture</h2>
+        <p class="section-desc">FlowAI is built on top-tier cloud, ingestion, and deep learning components, ensuring sub-second response latencies for city-wide matrices.</p>
+        
+        <div class="tech-grid">
+          <div class="tech-card glass glow-cyan">
+            <div class="tech-icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3>Deep Learning</h3>
+            <p>Spatio-temporal forecasting engines built on PyTorch Geometric & Temporal GNN paradigms.</p>
+          </div>
+          <div class="tech-card glass glow-purple">
+            <div class="tech-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+            <h3>Reinforcement Learning</h3>
+            <p>Multi-agent cooperation pipelines leveraging PPO optimization algorithms.</p>
+          </div>
+          <div class="tech-card glass glow-cyan">
+            <div class="tech-icon"><i class="fa-solid fa-database"></i></div>
+            <h3>Stream Ingestion</h3>
+            <p>High-throughput data ingestion using Apache Kafka clusters and real-time Flink streams.</p>
+          </div>
+          <div class="tech-card glass glow-purple">
+            <div class="tech-icon"><i class="fa-solid fa-cloud"></i></div>
+            <h3>Cloud Twin</h3>
+            <p>High-fidelity parallelized digital twin simulations running inside scalable cloud architectures.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section reveal">
+        <div class="cta-box glass">
+          <h2>Transform Your City’s Traffic Today</h2>
+          <p>Partner with FlowAI to deploy proactive congestion controls, reduce greenhouse gas emissions, and unlock premium urban mobility.</p>
+          
+          <div class="cta-actions">
+            <div class="subscribe-form">
+              <input type="email" placeholder="Enter municipal email..." aria-label="Municipal email address" />
+              <button type="button">Get Started</button>
+            </div>
+            <button class="btn btn-secondary"><i class="fa-solid fa-envelope"></i> Contact Sales</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky Footer -->
+      <footer>
+        <div class="footer-grid">
+          <div class="footer-info">
+            <div class="footer-logo">Flow<span>AI</span></div>
+            <p>Next-generation city traffic optimization. Eliminating reactive navigation backlogs through spatial temporal neural networks and cooperative reinforcement learning.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Technology</h4>
+            <ul>
+              <li><a href="#features">Graph Neural Networks</a></li>
+              <li><a href="#features">Reinforcement Learning</a></li>
+              <li><a href="#sandbox">Digital Twin Core</a></li>
+              <li><a href="#tech">Operational Stack</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Municipalities</h4>
+            <ul>
+              <li><a href="#usecases">Smart Cities</a></li>
+              <li><a href="#usecases">Traffic Planners</a></li>
+              <li><a href="#usecases">Emergency Crews</a></li>
+              <li><a href="#dashboard">Control Panel</a></li>
+            </ul>
+          </div>
+          <div class="footer-subscribe">
+            <h4>Security & Privacy</h4>
+            <p style="font-size: 0.8rem; color: var(--text-main); margin-bottom: 0.75rem;">All incoming GPS trajectories are fully anonymized at ingest and strip regional PI data logs immediately.</p>
+            <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--neon-cyan);">
+              <i class="fa-solid fa-shield-halved"></i> GDPR & ISO 27001 COMPLIANT
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2026 FlowAI Inc. All rights reserved. Pioneering network-level smart city mobility systems globally.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="FlowAI GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="social-link" aria-label="FlowAI LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="FlowAI Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Interactive AI Chatbot Widget -->
+      <div class="chatbot-widget">
+        <button class="chatbot-toggle" id="chat-toggle" aria-label="Open Traffic AI Assistant">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2 22l5.038-1.338C8.47 21.513 10.179 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/>
+          </svg>
+        </button>
+        
+        <div class="chatbot-window glass" id="chat-window">
+          <div class="chatbot-header">
+            <div class="chatbot-avatar">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2c1.1 0 2 .9 2 2v1h5c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2h-5v1c0 1.1-.9 2-2 2s-2-.9-2-2v-1H5c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h5V4c0-1.1.9-2 2-2zm0 6c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm-2.5 6.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5 0 1.5 1.5-.67 1.5-1.5 1.5zm5 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5 0 1.5 1.5-.67 1.5-1.5 1.5z"/>
+              </svg>
+            </div>
+            <div class="chatbot-info">
+              <h4>FlowAI Co-Pilot</h4>
+              <p><span class="status-indicator"></span> Autonomous Agent Online</p>
+            </div>
+          </div>
+          
+          <div class="chatbot-messages" id="chat-messages">
+            <div class="chat-bubble bot">
+              Hello! I'm the FlowAI Assistant. Ask me how our network-wide predictive GNNs or multi-agent signal optimization outperforms reactive route GPS suggestions!
+              <div class="chatbot-suggestions">
+                <button class="chat-suggest-btn" data-query="How does prediction work?">How does prediction work?</button>
+                <button class="chat-suggest-btn" data-query="Is physical hardware required?">Is hardware required?</button>
+                <button class="chat-suggest-btn" data-query="Who are your clients?">Who are your clients?</button>
+                <button class="chat-suggest-btn" data-query="What happens if MG Road closes during peak hours?"><i class="fa-solid fa-road-circle-exclamation"></i> MG Road Peak Closure</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chatbot-input-area">
+            <input type="text" id="chat-input" placeholder="Ask FlowAI a question..." aria-label="Chatbot query input" />
+            <button class="chatbot-send-btn" id="chat-send" aria-label="Send query">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script Injection -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
